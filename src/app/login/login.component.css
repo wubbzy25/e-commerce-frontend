@@ -1,0 +1,32 @@
+.login-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-container .left-section {
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+  gap: 3rem;
+}
+
+.login-container .left-section form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container .right-section .image-container {
+  width: 45vw;
+  min-width: 350px;
+}
+
+.login-container .right-section .image-container img {
+  padding: 8px;
+  width: 100%;
+  height: auto;
+  max-height: 50vw;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50px;
+}
