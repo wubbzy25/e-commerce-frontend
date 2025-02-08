@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { CartService } from '../Services/CartsService';
 import { ProductsService } from '../Services/ProductsService';
 import { catchError, switchMap, of } from 'rxjs';
-import { ToastComponent } from '../toast/toast.component';
+
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-card',
-  imports: [StarRatingComponent, ToastComponent, NgIf],
+  imports: [StarRatingComponent, NgIf],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
 })

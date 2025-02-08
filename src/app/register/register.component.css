@@ -79,6 +79,19 @@ main {
   font-size: clamp(1rem, 1vw, 2rem);
 }
 
+form .invalid {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transition: background-color 0.3s ease;
+}
+
+form .error {
+  color: #ff0000;
+  font-size: clamp(1rem, 1vw, 2rem);
+  width: 25vw;
+}
+
 .register-container .left-section form button:hover {
   background-color: #132736;
   transform: scale(1.05);

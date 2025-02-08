@@ -23,6 +23,17 @@
               placeholder="John"
               required
             />
+            <span
+              class="error"
+              *ngIf="
+                form.get('first_name')?.invalid &&
+                form.get('first_name')?.touched
+              "
+            >
+              <span *ngIf="form.get('first_name')?.hasError('required')"
+                >The field first name is required</span
+              >
+            </span>
           </div>
           <div class="form-block-name form-block">
             <label for="last-name">Last Name</label>
@@ -34,6 +45,16 @@
               placeholder="Doe"
               required
             />
+            <span
+              class="error"
+              *ngIf="
+                form.get('last_name')?.invalid && form.get('last_name')?.touched
+              "
+            >
+              <span *ngIf="form.get('last_name')?.hasError('required')"
+                >The field last name is required</span
+              >
+            </span>
           </div>
           <div class="form-block-phone form-block">
             <label for="phone">phone</label>
@@ -45,6 +66,23 @@
               placeholder="phone"
               required
             />
+            <span
+              class="error"
+              *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched"
+            >
+              <span *ngIf="form.get('phone')?.hasError('required')"
+                >The field phone is required</span
+              >
+              <span *ngIf="form.get('phone')?.hasError('minlength')"
+                >The phone number must be 10 digits
+              </span>
+              <span *ngIf="form.get('phone')?.hasError('maxlength')">
+                The phone number must be 10 digits
+              </span>
+              <span *ngIf="form.get('phone')?.hasError('pattern')">
+                The phone number must be a valid number
+              </span>
+            </span>
           </div>
           <div class="form-block-email form-block">
             <label for="email">Email</label>
@@ -56,6 +94,17 @@
               placeholder="Example@email.com"
               required
             />
+            <span
+              class="error"
+              *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+            >
+              <span *ngIf="form.get('email')?.hasError('required')">
+                The field email is required
+              </span>
+              <span *ngIf="form.get('email')?.hasError('email')"
+                >The email is not valid
+              </span>
+            </span>
           </div>
           <div class="form-block-password form-block">
             <label for="password">Password</label>
@@ -67,6 +116,20 @@
               placeholder="At least 8 characters"
               required
             />
+            <span
+              class="error"
+              *ngIf="
+                form.get('password')?.invalid && form.get('password')?.touched
+              "
+            >
+              <span *ngIf="form.get('password')?.hasError('required')"
+                >The field password is required</span
+              >
+              <span *ngIf="form.get('password')?.hasError('pattern')"
+                >Password must be 8-24 characters, with one uppercase letter,
+                two digits, and one special character.
+              </span>
+            </span>
           </div>
           <div class="form-block-password form-block">
             <label for="confirm-password">Confirm Password</label>
@@ -78,6 +141,21 @@
               placeholder="Re-enter your password"
               required
             />
+            <span
+              class="error"
+              *ngIf="
+                form.get('confirmPassword')?.invalid &&
+                form.get('confirmPassword')?.touched
+              "
+            >
+              <span *ngIf="form.get('confirmPassword')?.hasError('required')"
+                >The field password is required</span
+              >
+              <span *ngIf="form.get('confirmPassword')?.hasError('pattern')"
+                >Password must be 8-24 characters, with one uppercase letter,
+                two digits, and one special character.
+              </span>
+            </span>
           </div>
           <div class="form-block-terms form-block">
             <input
@@ -91,7 +169,21 @@
               I agree to the <a href="/terms">Terms and Conditions</a>
             </label>
           </div>
-          <button type="submit">Sign up</button>
+          <span
+            class="error"
+            *ngIf="form.get('terms')?.invalid && form.get('terms')?.touched"
+          >
+            <span *ngIf="form.get('terms')?.hasError('required')"
+              >You must agree to the terms and conditions
+            </span>
+          </span>
+          <button
+            type="submit"
+            [disabled]="form.invalid"
+            [class.invalid]="form.invalid"
+          >
+            Sign up
+          </button>
         </form>
         <p class="already-account">
           Already have an account? <a href="/login">Sign in</a>

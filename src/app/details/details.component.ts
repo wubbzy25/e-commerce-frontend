@@ -9,7 +9,6 @@ import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { CardComponent } from '../card/card.component';
 import { ReviewsCardComponent } from '../reviews-card/reviews-card.component';
-import { ToastComponent } from '../toast/toast.component';
 import { catchError } from 'rxjs/operators';
 import { CartService } from '../Services/CartsService';
 import { of, switchMap } from 'rxjs';
@@ -27,7 +26,6 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
     CardComponent,
     ReviewsCardComponent,
     NgClass,
-    ToastComponent,
   ],
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css'],

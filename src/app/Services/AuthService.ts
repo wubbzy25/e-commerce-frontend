@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +65,18 @@ export class AuthService {
   isAuthenticated(): boolean {
     let token = this.getToken();
     return token !== null;
+  }
+
+  isTokenExpired(token: string): boolean {
+    try {
+      const decodedToken: any = jwtDecode(token);
+      const exp = decodedToken.exp;
+      const currentTime = Math.floor(Date.now() / 1000);
+
+      return exp < currentTime;
+    } catch (error) {
+      return true;
+    }
   }
 
   logout(): void {

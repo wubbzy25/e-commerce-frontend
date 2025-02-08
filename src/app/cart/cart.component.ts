@@ -4,7 +4,6 @@ import { FooterComponent } from '../footer/footer.component';
 import { NgFor, NgIf, isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { CartService } from '../Services/CartsService';
 import { catchError, switchMap, of } from 'rxjs';
-import { ToastComponent } from '../toast/toast.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { Router } from '@angular/router';
 import { PaymentService } from '../Services/PaymentService';
@@ -26,14 +25,7 @@ interface CartItem {
 
 @Component({
   selector: 'app-cart',
-  imports: [
-    NavbarComponent,
-    FooterComponent,
-    NgFor,
-    NgIf,
-    ToastComponent,
-    MatDividerModule,
-  ],
+  imports: [NavbarComponent, FooterComponent, NgFor, NgIf, MatDividerModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })

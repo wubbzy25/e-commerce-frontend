@@ -41,14 +41,23 @@ export class LoginComponent {
 
   onSubmit() {
     const { email, password } = this.form.value;
-    console.log(email, password);
     this.authService.login({ email, password }).subscribe({
       next: (response) => {
         this.router.navigate(['/']);
       },
       error: (error) => {
-        console.error('Login error', error);
-        this.toastr.error('Login failed. please try again', 'error');
+        if (error.error.exception === 'EmailDontExists') {
+          this.toastr.error('Please check your email', 'Email Not Found');
+          return;
+        }
+
+        if (error.error.exception === 'BadCredentials') {
+          this.toastr.error('Please check your pasword', 'Invalid Credentials');
+          return;
+        }
+
+        this.toastr.error('An error occurred', 'Error');
+        return;
       },
     });
   }

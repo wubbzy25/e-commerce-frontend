@@ -17,8 +17,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
     provideToastr({
-      timeOut: 900,
+      timeOut: 2000,
       preventDuplicates: true,
+      progressBar: true,
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
