@@ -1,22 +1,198 @@
+main {
+  overflow: hidden;
+}
+
 .login-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  height: 100%;
 }
 
 .login-container .left-section {
   display: flex;
   flex-direction: column;
-  padding: 4rem;
-  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
+.login-container .left-section .header-left-section {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 2vw;
+}
+
+.login-container .left-section h1 {
+  font-size: clamp(2.5rem, 2.5vw, 3rem);
+  font-weight: 900;
+  color: #0c1421;
+  text-wrap: nowrap;
+}
+
+.login-container .left-section .header-left-section p {
+  font-size: clamp(1rem, 1vw, 2rem);
+  color: #313957;
+}
+
+.login-container .form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+}
 .login-container .left-section form {
   display: flex;
   flex-direction: column;
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  color: #0c1421;
+  text-align: start;
+}
+
+.login-container .left-section form .form-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.login-container .left-section form .form-block-email {
+  padding-bottom: 1rem;
+}
+
+.login-container .left-section form button {
+  background-color: #162d3a;
+  color: #f7fbff;
+  width: 20vw;
+  height: 3vw;
+  min-width: 350px;
+  min-height: 50px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  transition: transform 0.5s ease;
+  font-size: clamp(1rem, 1vw, 2rem);
+}
+
+.login-container .left-section form .invalid {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transition: background-color 0.3s ease;
+}
+
+.login-container .left-section form .error {
+  color: #ff0000;
+  font-size: clamp(1rem, 1vw, 2rem);
+  width: 25vw;
+}
+
+.login-container .left-section form button:hover {
+  background-color: #132736;
+  transform: scale(1.05);
+}
+
+.login-container .left-section form label {
+  font-size: clamp(1rem, 1vw, 2rem);
+}
+
+.login-container .left-section form input {
+  background-color: #f7fbff;
+  width: 20vw;
+  height: 2.8vw;
+  min-width: 350px;
+  min-height: 50px;
+  border-radius: 12px;
+  border: 1px solid #d4d7e3;
+  padding: 0 8px;
+  position: relative;
+}
+
+.login-container .left-section form .forgot-password {
+  align-self: flex-end;
+  margin: 1rem 0;
+  font-size: clamp(1.1rem, 1.1vw, 2rem);
+}
+
+.login-container .left-section form .forgot-password a {
+  color: #1e4ae9;
+  text-decoration: none;
+}
+
+.login-container .left-section .or {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 65%;
+  margin-bottom: 1.4rem;
+}
+
+.bar {
+  width: 65%;
+  flex: 1;
+  border: none;
+  height: 1px;
+  background-color: #cfdfe2;
+  margin: 0 8px;
+}
+
+.or span {
+  white-space: nowrap;
+  color: #294957;
+}
+.or span::after {
+  content: "Or";
+}
+
+.login-container .left-section .cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-container .left-section .cards-container .cards {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  min-width: 170px;
+  background-color: #f3f9fa;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 7px 0;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.5s ease;
+}
+
+.login-container .left-section .cards-container .cards.google-card::after {
+  content: "Sign in with Google";
+}
+
+.login-container .left-section .cards-container .cards.facebook-card::after {
+  content: "Sign in with Facebook";
+}
+
+.login-container .left-section .cards-container .cards:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.login-container .left-section .dont-account {
+  margin-top: 2rem;
+  font-size: clamp(1rem, 1vw, 2rem);
+  color: #313957;
+}
+
+.login-container .left-section .dont-account a {
+  color: #1e4ae9;
+  text-decoration: none;
 }
 
 .login-container .right-section .image-container {
+  height: 100vh;
   width: 45vw;
   min-width: 350px;
 }
@@ -24,9 +200,73 @@
 .login-container .right-section .image-container img {
   padding: 8px;
   width: 100%;
-  height: auto;
-  max-height: 50vw;
+  height: 100%;
   object-fit: cover;
   object-position: center;
-  border-radius: 50px;
+  border-radius: 25px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .login-container .left-section {
+    order: 2;
+    padding: 5px;
+  }
+
+  .login-container .right-section {
+    order: 1;
+    padding: 5px;
+  }
+
+  .login-container .right-section .image-container {
+    border-radius: 5px;
+    height: 25vh;
+    width: 100%;
+  }
+
+  .login-container .left-section {
+    align-items: center;
+    width: 100vw;
+  }
+
+  .login-container .left-section form {
+    align-items: center;
+  }
+
+  .login-container .left-section .header-left-section p {
+    text-align: start;
+  }
+
+  .login-container .left-section .or {
+    width: 80vw;
+  }
+  .bar {
+    width: 80vw;
+  }
+
+  .login-container .left-section .cards {
+    gap: 6px;
+  }
+
+  .login-container .left-section .cards-container {
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .login-container .left-section .cards-container .cards.google-card::after {
+    content: "Google";
+  }
+  .login-container .left-section .cards-container .cards.facebook-card::after {
+    content: "Facebook";
+  }
+
+  .or span::after {
+    content: "Or sign in with";
+  }
 }

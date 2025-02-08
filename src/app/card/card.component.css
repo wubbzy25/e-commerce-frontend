@@ -1,0 +1,109 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.card {
+  width: 20vw;
+  min-width: 250px;
+  cursor: pointer;
+}
+
+.card figure {
+  width: 15vw;
+  background-color: #f0eeed;
+  border-radius: 20px;
+  position: relative;
+  transition: filter 0.3s ease;
+}
+
+.card h2 {
+  padding: 10px 0;
+  font-size: clamp(1.1rem, 1.1vw, 2.1rem);
+  font-weight: 900;
+}
+
+.card p {
+  font-size: clamp(1.4rem, 1.4vw, 2.4rem);
+  font-weight: 900;
+  padding: 10px 0;
+}
+
+.card img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.card .image-container .hover-box-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vw;
+}
+
+.card .price-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.card .price-container .discount-card {
+  background-color: #ffeaea;
+  border-radius: 10px;
+  color: #fe3332;
+  padding: 0 20px;
+  font-weight: 900;
+  border-radius: 30px;
+  font-size: clamp(1rem, 1vw, 2rem);
+}
+
+.card .price-container .strikethrough {
+  text-decoration: line-through;
+  color: #ddd;
+}
+
+.card .image-container .hover-box-container .hover-box {
+  width: 10vw;
+  height: 3vw;
+  min-width: 120px;
+  min-height: 50px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  position: relative;
+  display: none;
+}
+
+.card .image-container .hover-box-container .hover-box:hover {
+  scale: 1.2;
+}
+
+.card .image-container .hover-box-container .hover-box p {
+  width: 100%;
+  text-align: center;
+  font-size: clamp(1.2rem, 1.2vw, 2.2rem);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card .image-container:hover .hover-box-container .hover-box {
+  display: block;
+}
+
+@media (width <= 768px) {
+  .card {
+    width: 100%;
+    min-width: 150px;
+    margin-bottom: 1rem;
+  }
+
+  .card figure {
+    width: 100%;
+  }
+}

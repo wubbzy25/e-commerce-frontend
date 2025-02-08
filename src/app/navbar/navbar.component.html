@@ -1,0 +1,41 @@
+<header>
+  <nav>
+    <div class="nav-left">
+      <i
+        [class.fa-solid]="true"
+        [class.fa-bars]="!isHamburgerMenuOpen"
+        [class.fa-times]="isHamburgerMenuOpen"
+        (click)="toggleHamburgerMenu()"
+        *ngIf="IsMobileScreen"
+      ></i>
+      <div class="dropdown_menu" *ngIf="isHamburgerMenuOpen">
+        <ul>
+          <li><a href="/catalog">Catalog</a></li>
+          <li><a href="#">Top Selling</a></li>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Brands</a></li>
+        </ul>
+      </div>
+      <h1><a href="/">SHOP.CO</a></h1>
+      <ul class="nav-links">
+        <li><a href="/catalog">Catalog</a></li>
+        <li><a href="#">Top Selling</a></li>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Brands</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search for products..." />
+      </div>
+      <i class="fa-solid fa-cart-shopping" (click)="redirectShoppingCart()"></i>
+      <div class="dropdown" (click)="toggleDropdown()">
+        <i class="fa-regular fa-circle-user"> </i>
+        <div class="dropdown-content" *ngIf="isDropdownOpen">
+          <a href="/login" (click)="logout($event)">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

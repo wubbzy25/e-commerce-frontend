@@ -1,0 +1,95 @@
+<app-navbar />
+<main>
+  <section class="first-section">
+    <div class="left-section">
+      <h2>FIND CLOTHES THATH MATCHES YOUR STYLE</h2>
+      <p>
+        Browse through our diverse range of meticulously crafted garments,
+        designed to bring out your individuality and cater to your sense of
+        style.
+      </p>
+      <button>Shop Now</button>
+      <div class="stats">
+        <p>
+          <span>200+</span> <br />
+          international Brands
+        </p>
+        <p>
+          <span>2,000+</span><br />
+          High-Quality Products
+        </p>
+        <p>
+          <span>30,000+</span><br />
+          Happy Customers
+        </p>
+      </div>
+    </div>
+    <div class="right-section">
+      <figure>
+        <img src="assets/images/homepage.png" alt="homepage" />
+      </figure>
+    </div>
+  </section>
+  <section class="second-section">
+    <figure>
+      <img src="assets/images/versace-logo.png" alt="" />
+    </figure>
+    <figure>
+      <img src="assets/images/zara-logo.png" alt="" />
+    </figure>
+    <figure>
+      <img src="assets/images/gucci-logo.png" alt="" />
+    </figure>
+    <figure>
+      <img src="assets/images/prada-logo.png" alt="" />
+    </figure>
+    <figure>
+      <img src="assets/images/calvin-klein-logo.png" alt="" />
+    </figure>
+  </section>
+  <section class="third-section">
+    <h2>NEW ARRIVALS</h2>
+    <div class="cards-container">
+      <div *ngFor="let product of newArrivals">
+        <app-card
+          [name]="product.name"
+          [rating]="product.averageScore"
+          [price]="product.price"
+          [image]="product.image"
+          [id_product]="product.id_product"
+        ></app-card>
+      </div>
+    </div>
+    <button>View All</button>
+    <hr class="separator" />
+
+    <h2>TOP SELLING</h2>
+    <div class="cards-container">
+      <div *ngFor="let product of topSelling">
+        <app-card
+          [name]="product.name"
+          [rating]="product.averageScore"
+          [price]="product.price"
+          [image]="product.image"
+          [id_product]="product.id_product"
+        ></app-card>
+      </div>
+    </div>
+    <button>View All</button>
+  </section>
+  <section class="fourth-section">
+    <div class="title-container">
+      <h2>OUR HAPPY CUSTOMERS</h2>
+    </div>
+    <div class="testimonials-container">
+      <div *ngFor="let review of reviews">
+        <app-reviews-card
+          [name]="review.name"
+          [rating]="review.score"
+          [review]="review.review"
+        ></app-reviews-card>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

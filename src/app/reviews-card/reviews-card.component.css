@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.review-card {
+  width: 20vw;
+  min-width: 250px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.review-card h2 {
+  margin-top: 10px;
+  font-size: clamp(1.4rem, 1.4vw, 2.2rem);
+  font-weight: 800;
+}
+
+.review-card p {
+  margin-top: 10px;
+  font-size: clamp(1.1rem, 1.1vw, 1.5rem);
+  font-weight: 600;
+  color: #676667;
+}

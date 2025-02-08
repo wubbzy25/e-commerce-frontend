@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+<main>
+  <h2>YOUR CART</h2>
+  <div class="cart-container">
+    <div class="right-section">
+      <div class="item-cart" *ngFor="let item of cartItems; let i = index">
+        <div class="cart-right-section">
+          <figure>
+            <img src="{{ item.product.image }}" alt="" />
+          </figure>
+          <div class="item-info">
+            <h3 class="title">{{ item.product.name }}</h3>
+            <div class="size-color-container">
+              <p class="size">Size: {{ item.size }}</p>
+              <p class="color">Color: {{ item.product.color }}</p>
+            </div>
+            <p class="price">${{ item.product.price }}</p>
+          </div>
+        </div>
+        <div class="cart-left-section">
+          <i
+            class="fa-solid fa-trash"
+            (click)="RemoveProduct(item.id_cart_item)"
+          ></i>
+          <div class="amount-card">
+            <button
+              class="fa-solid fa-minus"
+              (click)="RemoveAmountProduct(i, item.id_cart_item)"
+              [disabled]="productAmounts[i] == 1"
+            ></button>
+            <p>{{ productAmounts[i] }}</p>
+            <button
+              class="fa-solid fa-plus"
+              (click)="AddAmountProduct(i, item.id_cart_item)"
+              [disabled]="productAmounts[i] >= cartItems[i].product.stock"
+            ></button>
+          </div>
+        </div>
+      </div>
+      <h3 class="empty-cart-message" *ngIf="cartItems.length == 0">
+        Oops! Your cart looks a little lonely. Why not add some items to
+        brighten it up?
+      </h3>
+    </div>
+    <div class="left-section">
+      <h3>Order Summary</h3>
+      <div class="subtotal-container">
+        <p>Subtotal</p>
+        <p>${{ subtotal }}</p>
+      </div>
+      <div class="discount-container">
+        <p>Discount</p>
+        <p class="discount-price">$-{{ discount }}</p>
+      </div>
+      <div class="Delivery-container">
+        <p>Delivery Fee</p>
+        <p>${{ delivery }}</p>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="total-container">
+        <p class="total">Total</p>
+        <p>${{ total }}</p>
+      </div>
+      <div class="promo-code">
+        <input type="text" placeholder=" Enter your promo code" />
+        <button class="apply-button">Apply</button>
+      </div>
+      <button class="checkout-button" (click)="checkout()">Checkout</button>
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>
