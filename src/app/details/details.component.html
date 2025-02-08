@@ -1,0 +1,123 @@
+<app-navbar></app-navbar>
+<main class="details-container">
+  <app-toast
+    Title="{{ ToastInfo.Title }}"
+    message="{{ ToastInfo.Message }}"
+    [type]="ToastInfo.Type"
+    [visible]="ToastInfo.Visible"
+  ></app-toast>
+  <div class="header-container">
+    <figure>
+      <img src="{{ product.image }}" alt="" />
+    </figure>
+    <div class="header-content">
+      <h2>{{ product.name }}</h2>
+      <app-star-rating
+        class="rating"
+        [rating]="product.averageScore"
+      ></app-star-rating>
+      <div class="price-container">
+        <p *ngIf="price_discount > 0">${{ price_discount }}</p>
+        <p *ngIf="price_discount > 0" class="strikethrough">
+          ${{ product.price }}
+        </p>
+        <p *ngIf="price_discount == 0" class="price">${{ product.price }}</p>
+        <div *ngIf="price_discount > 0" class="discount-card">
+          <p>{{ discount_percentage }}%</p>
+        </div>
+      </div>
+
+      <p class="description">{{ product.description }}</p>
+      <mat-divider></mat-divider>
+      <p class="color">Color</p>
+      <div class="{{ product.color }}-color">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <mat-divider></mat-divider>
+      <p class="size">Choose Size</p>
+      <div class="size-container">
+        <div
+          class="size-box"
+          [class.selected]="selectedSizes.includes(size.name)"
+          *ngFor="let size of product.sizes"
+          (click)="toggleSize(size.name)"
+        >
+          <p>
+            {{ size.name }}
+          </p>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="footer-content">
+        <div class="amount-card">
+          <button
+            class="fa-solid fa-minus"
+            (click)="RemoveAmountProduct()"
+            [disabled]="productAmount == 1"
+          ></button>
+          <p>{{ productAmount }}</p>
+          <button
+            class="fa-solid fa-plus"
+            (click)="AddAmountProduct()"
+            [disabled]="productAmount == product.stock"
+          ></button>
+        </div>
+        <button class="add-to-cart" (click)="AddCart()">Add To Cart</button>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="review-container">
+    <div class="review-header">
+      <h2>All Reviews({{ Reviews.length }})</h2>
+      <div class="left-section">
+        <div class="sort-container">
+          <button class="sort-box" (click)="ToggleDropDownReviewsMenu()">
+            {{ SelectSortReviewOption }}
+            <i
+              class="fa-solid"
+              [ngClass]="{
+                'fa-chevron-down': !IsDropDownMenuReviewsOpen,
+                'fa-chevron-up': IsDropDownMenuReviewsOpen
+              }"
+            ></i>
+          </button>
+          <div class="dropdown-menu" *ngIf="IsDropDownMenuReviewsOpen">
+            <div
+              class="dropdown-item"
+              *ngFor="let reviewSort of getFilteredOptions()"
+              (click)="selectOption(reviewSort)"
+            >
+              <p>{{ reviewSort }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="review-container">
+      <div *ngFor="let review of Reviews">
+        <app-reviews-card
+          [name]="review.name"
+          [rating]="review.score"
+          [review]="review.review"
+        ></app-reviews-card>
+      </div>
+    </div>
+  </div>
+  <div class="similar-container">
+    <h2>YOU MIGHT ALSO LIKE</h2>
+    <div class="similar-card-container">
+      <div *ngFor="let product of SimilarProducts">
+        <app-card
+          [name]="product.name"
+          [rating]="product.averageScore"
+          [price]="product.price"
+          [image]="product.image"
+          [id_product]="product.id_product"
+        ></app-card>
+      </div>
+    </div>
+  </div>
+</main>
+
+<app-footer></app-footer>

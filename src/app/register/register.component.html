@@ -1,1 +1,111 @@
-<main></main>
+<main>
+  <section class="register-container">
+    <!-- FORM SECTION -->
+    <div class="left-section">
+      <div class="form-container">
+        <!-- HEADER FORM -->
+        <div class="header-left-section">
+          <h1>Welcome! 👋</h1>
+          <p>
+            Join us today and start your journey. Create your account to enjoy
+            exclusive offers and seamless shopping.
+          </p>
+        </div>
+        <!-- REGISTER FORM -->
+        <form [formGroup]="form" (ngSubmit)="onSubmitRegister()">
+          <div class="form-block-name form-block">
+            <label for="first-name">First Name</label>
+            <input
+              formControlName="first_name"
+              type="text"
+              name="first-name"
+              id="first-name"
+              placeholder="John"
+              required
+            />
+          </div>
+          <div class="form-block-name form-block">
+            <label for="last-name">Last Name</label>
+            <input
+              formControlName="last_name"
+              type="text"
+              name="last-name"
+              id="last-name"
+              placeholder="Doe"
+              required
+            />
+          </div>
+          <div class="form-block-phone form-block">
+            <label for="phone">phone</label>
+            <input
+              formControlName="phone"
+              type="text"
+              name="phone"
+              id="phone"
+              placeholder="phone"
+              required
+            />
+          </div>
+          <div class="form-block-email form-block">
+            <label for="email">Email</label>
+            <input
+              formControlName="email"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Example@email.com"
+              required
+            />
+          </div>
+          <div class="form-block-password form-block">
+            <label for="password">Password</label>
+            <input
+              formControlName="password"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="At least 8 characters"
+              required
+            />
+          </div>
+          <div class="form-block-password form-block">
+            <label for="confirm-password">Confirm Password</label>
+            <input
+              formControlName="confirmPassword"
+              type="password"
+              name="confirm-password"
+              id="confirm-password"
+              placeholder="Re-enter your password"
+              required
+            />
+          </div>
+          <div class="form-block-terms form-block">
+            <input
+              formControlName="terms"
+              type="checkbox"
+              name="terms"
+              id="terms"
+              required
+            />
+            <label for="terms">
+              I agree to the <a href="/terms">Terms and Conditions</a>
+            </label>
+          </div>
+          <button type="submit">Sign up</button>
+        </form>
+        <p class="already-account">
+          Already have an account? <a href="/login">Sign in</a>
+        </p>
+      </div>
+    </div>
+    <!-- IMAGE SECTION -->
+    <div class="right-section">
+      <figure class="image-container">
+        <img
+          src="assets/images/register-image.png"
+          alt="A vibrant and welcoming visual representation for new users"
+        />
+      </figure>
+    </div>
+  </section>
+</main>

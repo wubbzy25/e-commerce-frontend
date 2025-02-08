@@ -1,0 +1,14 @@
+<div class="star-rating">
+  <ng-container *ngFor="let star of stars">
+    <ng-container *ngIf="star === 'full'">
+      <i class="fa fa-star"></i>
+    </ng-container>
+    <ng-container *ngIf="star === 'half'">
+      <i class="fa fa-star-half-alt"></i>
+    </ng-container>
+    <ng-container *ngIf="star === 'empty'">
+      <i class="fa fa-star-o"></i>
+    </ng-container>
+  </ng-container>
+  <p>{{ rating }}/5</p>
+</div>

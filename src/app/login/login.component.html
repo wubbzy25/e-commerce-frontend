@@ -2,52 +2,71 @@
   <section class="login-container">
     <!-- FORM SECTION -->
     <div class="left-section">
-      <!-- HEADER FORM -->
-      <div class="header-left-section">
-        <h1>Welcome Back 👋</h1>
-        <p>
-          Today is a new day. It's your day. You shape it. Sign in to start
-          managing your purchases.
+      <div class="form-container">
+        <!-- HEADER FORM -->
+        <div class="header-left-section">
+          <h1>Welcome Back 👋</h1>
+          <p>
+            Today is a new day. It's your day. You shape it. Sign in to start
+            managing your purchases.
+          </p>
+        </div>
+        <!-- LOGIN FORM -->
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-block-name form-block">
+            <label for="email">Email</label>
+            <input
+              formControlName="email"
+              type="email"
+              placeholder="Enter your email"
+            />
+            <span
+              class="error"
+              *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+            >
+              <span *ngIf="form.get('email')?.hasError('required')"
+                >The field email is required</span
+              >
+              <span *ngIf="form.get('email')?.hasError('email')"
+                >The email is not valid</span
+              >
+            </span>
+          </div>
+          <div class="form-block-password form-block">
+            <label for="password">Password</label>
+            <input
+              formControlName="password"
+              type="password"
+              placeholder="Enter your password"
+            />
+            <span
+              class="error"
+              *ngIf="
+                form.get('password')?.invalid && form.get('password')?.touched
+              "
+            >
+              <span *ngIf="form.get('password')?.hasError('required')"
+                >The field password is required</span
+              >
+              <span *ngIf="form.get('password')?.hasError('pattern')"
+                >Password must be 8-24 characters, with one uppercase letter,
+                two digits, and one special character.
+              </span>
+            </span>
+          </div>
+          <p class="forgot-password"><a href="">Forgot Password?</a></p>
+          <button
+            type="submit"
+            [disabled]="form.invalid"
+            [class.invalid]="form.invalid"
+          >
+            Sign in
+          </button>
+        </form>
+        <p class="dont-account">
+          Don't you have an account? <a href="/register">Sign up</a>
         </p>
       </div>
-      <!-- LOGIN FORM -->
-      <form action="">
-        <label for="">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Example@email.com"
-        />
-        <label for="">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="At least 8 characters"
-        />
-        <p>Forgot Password?</p>
-        <button type="submit">Sign in</button>
-      </form>
-      <!-- AUTH 2.0  -->
-      <p>Or</p>
-      <div class="google-card cards">
-        <figure class="icon-container">
-          <img
-            src="assets/icons/google-icon.png"
-            alt="The Google logo, consisting of colorful letters with a blue 'G', followed by red, yellow, blue, green, and red letters spelling 'oogle'. This logo is widely recognized as the symbol for the search engine giant Google"
-          />
-        </figure>
-      </div>
-      <div class="facebook-card cards">
-        <figure class="icon-container">
-          <img
-            src="assets/icons/facebook-icon.png"
-            alt="The Facebook logo, consisting of two horizontal stripes of colorful letters with a blue 'F', followed by red, yellow, blue, green, and red letters spelling 'acebook'. This logo is widely recognized as the symbol for the social media giant Facebook"
-          />
-        </figure>
-      </div>
-      <p>Don't you have an account? <a href="/register">Sign up</a></p>
     </div>
     <!-- IMAGE SECTION -->
     <div class="right-section">

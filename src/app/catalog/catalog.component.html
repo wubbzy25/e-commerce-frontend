@@ -1,0 +1,273 @@
+<app-navbar></app-navbar>
+<main>
+  <mat-divider></mat-divider>
+  <div class="content-container">
+    <aside class="sidebar sidebar-desktop">
+      <div class="title-sidebar">
+        <h2>Filters</h2>
+        <figure>
+          <img src="assets/icons/filter-icon.png" alt="" />
+        </figure>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="price-filter">
+        <h2>Price</h2>
+        <div class="price-input">
+          <input type="number" placeholder="min" [(ngModel)]="minPrice" />
+          <input type="number" placeholder="max" [(ngModel)]="maxPrice" />
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="color-filter">
+        <h2>Colors</h2>
+        <div class="color-container">
+          <div
+            *ngFor="
+              let color of [
+                'green',
+                'red',
+                'yellow',
+                'orange',
+                'blue',
+                'dark-blue',
+                'purple',
+                'pink',
+                'white',
+                'black'
+              ]
+            "
+            class="{{ color }}-color"
+            [class.selected]="selectedColors.includes(color)"
+            (click)="toggleColor(color)"
+          >
+            <i
+              class="fa-solid fa-check"
+              *ngIf="selectedColors.includes(color)"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="size-filter">
+        <div class="size-container">
+          <div
+            *ngFor="
+              let size of [
+                'XX-Small',
+                'X-Small',
+                'Small',
+                'Medium',
+                'Large',
+                'X-Large',
+                'XX-Large',
+                '3X-Large',
+                '4X-Large'
+              ]
+            "
+            class="size-card"
+            [class.selected]="selectedSizes.includes(size)"
+            (click)="toggleSize(size)"
+          >
+            <p>{{ size }}</p>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="dress-filter">
+        <ul>
+          <li
+            *ngFor="let style of ['Casual', 'Formal', 'Party', 'Gym']"
+            [class.selected]="selectedDressStyles.includes(style)"
+          >
+            <div class="dress-style-check-container">
+              <a (click)="toggleDressStyle(style)">{{ style }}</a>
+              <i
+                class="fa-solid fa-check"
+                *ngIf="selectedDressStyles.includes(style)"
+              ></i>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <button (click)="applyFilters()">Apply Filter</button>
+    </aside>
+
+    <!-- sidebar mobile -->
+    <aside
+      class="sidebar sidebar-mobile"
+      *ngIf="IsFiltersMenuOpen && IsMobileScreen"
+    >
+      <div class="title-sidebar">
+        <h2>Filters</h2>
+        <i class="fa-solid fa-xmark" (click)="toggleFiltersMenu()"></i>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="price-filter">
+        <h2>Price</h2>
+        <div class="price-input">
+          <input type="number" placeholder="min" [(ngModel)]="minPrice" />
+          <input type="number" placeholder="max" [(ngModel)]="maxPrice" />
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="color-filter">
+        <h2>Colors</h2>
+        <div class="color-container">
+          <div
+            *ngFor="
+              let color of [
+                'green',
+                'red',
+                'yellow',
+                'orange',
+                'blue',
+                'dark-blue',
+                'purple',
+                'pink',
+                'white',
+                'black'
+              ]
+            "
+            class="{{ color }}-color"
+            [class.selected]="selectedColors.includes(color)"
+            (click)="toggleColor(color)"
+          >
+            <i
+              class="fa-solid fa-check"
+              *ngIf="selectedColors.includes(color)"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="size-filter">
+        <div class="size-container">
+          <div
+            *ngFor="
+              let size of [
+                'XX-Small',
+                'X-Small',
+                'Small',
+                'Medium',
+                'Large',
+                'X-Large',
+                'XX-Large',
+                '3X-Large',
+                '4X-Large'
+              ]
+            "
+            class="size-card"
+            [class.selected]="selectedSizes.includes(size)"
+            (click)="toggleSize(size)"
+          >
+            <p>{{ size }}</p>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="dress-filter">
+        <ul>
+          <li
+            *ngFor="let style of ['Casual', 'Formal', 'Party', 'Gym']"
+            [class.selected]="selectedDressStyles.includes(style)"
+          >
+            <div class="dress-style-check-container">
+              <a (click)="toggleDressStyle(style)">{{ style }}</a>
+              <i
+                class="fa-solid fa-check"
+                *ngIf="selectedDressStyles.includes(style)"
+              ></i>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <button (click)="applyFilters()" (click)="toggleFiltersMenu()">
+        Apply Filter
+      </button>
+    </aside>
+    <section class="products">
+      <div class="products-title">
+        <h2 (click)="toggleFiltersMenu()">Products</h2>
+        <div class="sort-container" *ngIf="hasProducts()">
+          <p>Showing 1-9 of {{ TotalProducts }} Products</p>
+          <p class="sort">Sort By:</p>
+          <div class="dropdown-sort">
+            <button
+              class="dropbtn"
+              (click)="IsDropDownSortMenuOpen = !IsDropDownSortMenuOpen"
+            >
+              {{ SelectedOption }}
+              <i
+                class="fa-solid"
+                [ngClass]="{
+                  'fa-chevron-down': !IsDropDownSortMenuOpen,
+                  'fa-chevron-up': IsDropDownSortMenuOpen
+                }"
+              ></i>
+            </button>
+            <div class="dropdown-sort-content" *ngIf="IsDropDownSortMenuOpen">
+              <p
+                *ngFor="let option of getFilteredOptions()"
+                (click)="selectOption(option)"
+              >
+                {{ option }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="filter-circle" (click)="toggleFiltersMenu()">
+          <figure>
+            <img src="assets/icons/filter-black-icon.png" alt="" />
+          </figure>
+        </div>
+      </div>
+      <div class="products-container">
+        <div class="product" *ngFor="let product of Products">
+          <app-card
+            [name]="product.name"
+            [rating]="product.averageScore"
+            [price]="product.price"
+            [image]="product.image"
+            [id_product]="product.id_product"
+            [discount]="product.discount"
+          ></app-card>
+        </div>
+      </div>
+      <div class="not-matching" *ngIf="!hasProducts()">
+        <p>No products were found...</p>
+      </div>
+      <div class="products-sliders" *ngIf="hasProducts()">
+        <div class="arrow-left">
+          <button (click)="previousPage()" [disabled]="CurrentPage == 0">
+            <i class="fa-solid fa-arrow-left"></i>
+            Previous
+          </button>
+        </div>
+
+        <div class="card-page-container">
+          <div *ngFor="let i of [].constructor(TotalPages); let page = index">
+            <div class="page" *ngIf="CurrentPage == page">
+              <div class="active-page">
+                <p>{{ page + 1 }}</p>
+              </div>
+            </div>
+            <p class="number-page" *ngIf="CurrentPage != page">
+              {{ page + 1 }}
+            </p>
+          </div>
+        </div>
+        <div class="arrow-right">
+          <button
+            class="ar"
+            (click)="nextPage()"
+            [disabled]="CurrentPage == TotalPages - 1"
+          >
+            Next
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<app-footer></app-footer>

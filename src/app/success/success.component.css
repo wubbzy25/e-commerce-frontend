@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #cfd9e8;
+}
+
+.receipt-card {
+  background-color: #ffffff;
+  width: 30vw;
+  padding: 2rem;
+  border-radius: 20px;
+}
+
+.receipt-card .header-card {
+  text-align: center;
+}
+
+.receipt-card .header-card .circle {
+  background-color: #e5f4ed;
+  width: 5vw;
+  height: 5vw;
+  border-radius: 50%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.receipt-card .header-card .circle i {
+  font-size: clamp(2.2rem, 2.2vw, 3.2rem);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #23a26d;
+}
+
+.receipt-card .header-card h2 {
+  font-size: clamp(1.7rem, 1.7vw, 2.7rem);
+  color: #474747;
+  font-family: "Poppins", serif;
+  margin: 0.3rem;
+}
+
+.receipt-card .header-card p {
+  font-size: clamp(1.8rem, 1.8vw, 2.8rem);
+  font-weight: 900;
+  font-family: "Poppins", serif;
+  margin: 0.3rem;
+}
+
+.receipt-card .content-card {
+  padding: 1rem 0;
+}
+
+.receipt-card .content-card .ref-container,
+.receipt-card .content-card .payment-time-container,
+.receipt-card .content-card .payment-method-container,
+.receipt-card .content-card .sender-name-container,
+.receipt-card .footer-card .amount-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.receipt-card .content-card .ref-container {
+  overflow: hidden;
+  gap: 5rem;
+}
+
+.receipt-card .content-card .ref-container p,
+.receipt-card .content-card .payment-time-container p,
+.receipt-card .content-card .payment-method-container p,
+.receipt-card .content-card .sender-name-container p,
+.receipt-card .footer-card .amount-container p {
+  font-size: clamp(1.1rem, 1.1vw, 2.1rem);
+  font-family: "Poppins", serif;
+  font-weight: 900;
+}
+
+.receipt-card .content-card .ref-container .text,
+.receipt-card .content-card .payment-time-container .text,
+.receipt-card .content-card .payment-method-container .text,
+.receipt-card .content-card .sender-name-container .text,
+.receipt-card .footer-card .amount-container .text {
+  color: #707070;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .receipt-card {
+    width: 100%;
+  }
+
+  main {
+    padding: 1rem;
+  }
+}

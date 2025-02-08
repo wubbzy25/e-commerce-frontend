@@ -1,0 +1,23 @@
+<div
+  class="toast"
+  [ngClass]="{
+    'toast-success': type,
+    'toast-error': !type
+  }"
+  *ngIf="visible"
+>
+  <div class="toast-right">
+    <i
+      class="fa-solid"
+      [ngClass]="{
+        'fa-circle-check icon-success': type,
+        'fa-circle-exclamation icon-error': !type
+      }"
+    ></i>
+    <div class="toast-info">
+      <h2>{{ Title }}</h2>
+      <p>{{ message }}</p>
+    </div>
+  </div>
+  <i class="fa-solid fa-xmark xmark" (click)="closeToast()"></i>
+</div>

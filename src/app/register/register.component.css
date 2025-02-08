@@ -1,0 +1,273 @@
+main {
+  overflow: hidden;
+}
+
+.register-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.register-container .left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.register-container .left-section .header-left-section {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 2vw;
+}
+
+.register-container .left-section h1 {
+  font-size: clamp(2.5rem, 2.5vw, 3rem);
+  font-weight: 900;
+  color: #0c1421;
+}
+
+.register-container .left-section .header-left-section p {
+  font-size: clamp(1rem, 1vw, 2rem);
+  color: #313957;
+}
+
+.register-container .form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+}
+
+.register-container .left-section form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  color: #0c1421;
+  text-align: start;
+}
+
+.register-container .left-section form .form-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.register-container .left-section form .form-block-name,
+.register-container .left-section form .form-block-email,
+.register-container .left-section form .form-block-phone,
+.register-container .left-section form .form-block-password {
+  padding-bottom: 1rem;
+}
+
+.register-container .left-section form button {
+  background-color: #162d3a;
+  color: #f7fbff;
+  width: 20vw;
+  height: 3vw;
+  min-width: 350px;
+  min-height: 50px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.5s ease;
+  font-size: clamp(1rem, 1vw, 2rem);
+}
+
+.register-container .left-section form button:hover {
+  background-color: #132736;
+  transform: scale(1.05);
+}
+
+.register-container .left-section form label {
+  font-size: clamp(1rem, 1vw, 2rem);
+}
+
+.register-container .left-section form input {
+  background-color: #f7fbff;
+  width: 20vw;
+  height: 2.8vw;
+  min-width: 350px;
+  min-height: 50px;
+  border-radius: 12px;
+  border: 1px solid #d4d7e3;
+  padding: 0 8px;
+}
+
+.register-container .left-section form .form-block-terms {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 0 5px;
+  align-items: center;
+  padding-bottom: 1.5rem;
+}
+
+.register-container .left-section form .form-block-terms input {
+  width: 15px;
+  min-width: 15px;
+}
+
+.register-container .left-section form .form-block-terms label {
+  font-size: clamp(0.9rem, 1vw, 1.2rem);
+}
+
+.register-container .left-section .or {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 65%;
+  margin-bottom: 1.4rem;
+}
+
+.bar {
+  width: 65%;
+  flex: 1;
+  border: none;
+  height: 1px;
+  background-color: #cfdfe2;
+  margin: 0 8px;
+}
+
+.or span {
+  white-space: nowrap;
+  color: #294957;
+}
+
+.or span::after {
+  content: "Or";
+}
+
+.register-container .left-section .cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.register-container .left-section .cards-container .cards {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  min-width: 170px;
+  background-color: #f3f9fa;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 7px 0;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.5s ease;
+}
+
+.register-container .left-section .cards-container .cards.google-card::after {
+  content: "Sign up with Google";
+}
+
+.register-container .left-section .cards-container .cards.facebook-card::after {
+  content: "Sign up with Facebook";
+}
+
+.register-container .left-section .cards-container .cards:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.register-container .left-section .already-account {
+  margin-top: 2rem;
+  font-size: clamp(1rem, 1vw, 2rem);
+  color: #313957;
+  margin-bottom: 15px;
+}
+
+.register-container .left-section .already-account a {
+  color: #1e4ae9;
+  text-decoration: none;
+}
+
+.register-container .right-section .image-container {
+  height: 100%;
+  width: 45vw;
+  min-width: 350px;
+}
+
+.register-container .right-section .image-container img {
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 25px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  .register-container {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .register-container .left-section {
+    order: 2;
+    padding: 5px;
+  }
+
+  .register-container .right-section {
+    order: 1;
+    padding: 5px;
+  }
+
+  .register-container .right-section .image-container {
+    border-radius: 5px;
+    height: 25vh;
+    width: 100%;
+  }
+
+  .register-container .left-section {
+    align-items: center;
+    width: 100vw;
+  }
+
+  .register-container .left-section form {
+    align-items: center;
+  }
+
+  .register-container .left-section .header-left-section p {
+    text-align: start;
+  }
+
+  .register-container .left-section .or {
+    width: 80vw;
+  }
+  .bar {
+    width: 80vw;
+  }
+
+  .register-container .left-section .cards {
+    gap: 6px;
+  }
+
+  .register-container .left-section .cards-container {
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .register-container .left-section .cards-container .cards.google-card::after {
+    content: "Google";
+  }
+  .register-container
+    .left-section
+    .cards-container
+    .cards.facebook-card::after {
+    content: "Facebook";
+  }
+
+  .or span::after {
+    content: "Or sign up with";
+  }
+}

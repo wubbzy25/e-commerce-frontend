@@ -1,0 +1,37 @@
+<main>
+  <div class="receipt-card">
+    <div class="header-card">
+      <div class="circle">
+        <i class="fa-solid fa-check-circle"></i>
+      </div>
+      <h2>Payment Success!</h2>
+      <p>USD {{ price }}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="content-card">
+      <div class="ref-container">
+        <p class="text">Ref number</p>
+        <p>{{ ref_number }}</p>
+      </div>
+      <div class="payment-time-container">
+        <p class="text">Payment Time</p>
+        <p>{{ payment_time }}</p>
+      </div>
+      <div class="payment-method-container">
+        <p class="text">Payment Method</p>
+        <p>{{ payment_method }}</p>
+      </div>
+      <div class="sender-name-container">
+        <p class="text">Sender Name</p>
+        <p>{{ name }}</p>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="footer-card">
+      <div class="amount-container">
+        <p class="text">Amount</p>
+        <p>USD {{ price }}</p>
+      </div>
+    </div>
+  </div>
+</main>
