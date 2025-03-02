@@ -46,11 +46,11 @@
       <h3>Order Summary</h3>
       <div class="subtotal-container">
         <p>Subtotal</p>
-        <p>${{ subtotal }}</p>
+        <p>${{ subtotal() }}</p>
       </div>
       <div class="discount-container">
         <p>Discount</p>
-        <p class="discount-price">$-{{ discount }}</p>
+        <p class="discount-price">$-{{ discount() }}</p>
       </div>
       <div class="Delivery-container">
         <p>Delivery Fee</p>
@@ -59,7 +59,7 @@
       <mat-divider></mat-divider>
       <div class="total-container">
         <p class="total">Total</p>
-        <p>${{ total }}</p>
+        <p>${{ total() }}</p>
       </div>
       <div class="promo-code">
         <input type="text" placeholder=" Enter your promo code" />

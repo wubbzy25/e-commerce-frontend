@@ -222,7 +222,7 @@
         </div>
       </div>
       <div class="products-container">
-        <div class="product" *ngFor="let product of Products">
+        <div class="product" *ngFor="let product of Products.content">
           <app-card
             [name]="product.name"
             [rating]="product.averageScore"

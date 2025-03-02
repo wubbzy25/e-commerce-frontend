@@ -1,9 +1,9 @@
+@import "ngx-toastr/toastr";
+
 @font-face {
   font-family: "Abril Fatface", serif;
   src: url("../public/assets/fonts/AbrilFatface-Regular.ttf");
 }
-
-@import "ngx-toastr/toastr";
 
 * {
   padding: 0;
