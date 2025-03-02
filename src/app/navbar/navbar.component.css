@@ -81,7 +81,6 @@ header .nav-right .fa-circle-user {
 }
 
 .dropdown {
-  z-index: 1000000;
   position: relative;
   display: inline-block;
 }

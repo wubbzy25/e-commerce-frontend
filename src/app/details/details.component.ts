@@ -11,8 +11,11 @@ import { CardComponent } from '../card/card.component';
 import { ReviewsCardComponent } from '../reviews-card/reviews-card.component';
 import { catchError } from 'rxjs/operators';
 import { CartService } from '../Services/CartsService';
-import { of, switchMap } from 'rxjs';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { of, switchMap, throwError, Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { Product } from '../../interfaces/Product';
+
+import { ReviewById } from '../../interfaces/ReviewById';
 
 @Component({
   selector: 'app-details',
@@ -31,19 +34,13 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
   styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent implements OnInit {
-  ToastInfo = {
-    Title: '',
-    Message: '',
-    Type: false,
-    Visible: false,
-  };
-  SimilarProducts: any[] = [];
+  SimilarProducts: Product[] = [];
   SelectedProduct = {
     id_product: 0,
     quantity: 1,
     size: '',
   };
-  product: any;
+  product: Product = {} as Product;
   id_product: number = 0;
   productAmount: number = 1;
   TotalPages: number = 0;
@@ -56,7 +53,7 @@ export class DetailsComponent implements OnInit {
     'Lowest Score',
   ];
   CurrentPage: number = 0;
-  Reviews: any[] = [];
+  Reviews!: ReviewById;
   selectedSizes: string[] = [];
   price_discount: number = 0;
   discount_percentage: number = 0;
@@ -65,9 +62,8 @@ export class DetailsComponent implements OnInit {
     private productsService: ProductsService,
     private reviewsService: ReviewsService,
     private route: ActivatedRoute,
-    private cartService: CartService,
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private toastr: ToastrService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -76,20 +72,10 @@ export class DetailsComponent implements OnInit {
       this.fetchReviews(this.id_product);
       this.productsService
         .getProductById(this.id_product)
-        .pipe(
-          catchError((error) => {
-            this.EditToastMessage(
-              'Error',
-              'Failed to fetch product details',
-              false
-            );
-            return of(null);
-          })
-        )
         .subscribe((response) => {
           if (response) {
             this.product = response;
-            console.log(response);
+
             this.SelectedProduct.id_product = response.id_product;
             this.productAmount = 1;
             this.selectedSizes = [];
@@ -99,21 +85,9 @@ export class DetailsComponent implements OnInit {
         });
     });
 
-    this.productsService
-      .getSimilarProducts()
-      .pipe(
-        catchError((error) => {
-          this.EditToastMessage(
-            'Error',
-            'Failed to fetch similar products',
-            false
-          );
-          return of([]);
-        })
-      )
-      .subscribe((response) => {
-        this.SimilarProducts = response;
-      });
+    this.productsService.getSimilarProducts().subscribe((response) => {
+      this.SimilarProducts = response;
+    });
   }
 
   fetchReviews(id: number) {
@@ -124,14 +98,8 @@ export class DetailsComponent implements OnInit {
         9,
         this.mapSortOption(this.SelectSortReviewOption)
       )
-      .pipe(
-        catchError((error) => {
-          this.EditToastMessage('Error', 'Failed to fetch reviews', false);
-          return of({ content: [] });
-        })
-      )
       .subscribe((response) => {
-        this.Reviews = response.content;
+        this.Reviews = response;
       });
   }
 
@@ -159,13 +127,6 @@ export class DetailsComponent implements OnInit {
       this.productAmount++;
       this.updateSelectedProduct();
     }
-  }
-
-  EditToastMessage(title: string, message: string, type: boolean) {
-    this.ToastInfo.Title = title;
-    this.ToastInfo.Message = message;
-    this.ToastInfo.Type = type;
-    this.ToastInfo.Visible = true;
   }
 
   RemoveAmountProduct() {
@@ -223,7 +184,6 @@ export class DetailsComponent implements OnInit {
   updateSelectedProduct() {
     this.SelectedProduct.quantity = this.productAmount;
     this.SelectedProduct.size = this.selectedSizes[0] || '';
-    console.log(this.SelectedProduct);
   }
 
   selectRandomSize() {
@@ -239,52 +199,51 @@ export class DetailsComponent implements OnInit {
       this.selectRandomSize();
     }
 
-    this.cartService
-      .GetCart()
-      .pipe(
-        catchError(() => {
-          return this.cartService.CreateCart();
-        }),
-        switchMap((response) => {
-          if (response && response.id_cart) {
-            return of(response);
-          } else {
-            return this.cartService.CreateCart();
-          }
-        })
-      )
-      .subscribe((response) => {
+    this.ensureCart().subscribe(
+      (response) => {
         if (response && response.id_cart) {
-          this.cartService
-            .AddItemToCart(
-              this.SelectedProduct.quantity,
-              this.SelectedProduct.id_product,
-              response.id_cart,
-              this.SelectedProduct.size
-            )
-            .subscribe(
-              (success) => {
-                this.EditToastMessage(
-                  'Success',
-                  'Item added to cart successfully!',
-                  true
-                );
-              },
-              (error) => {
-                this.EditToastMessage(
-                  'Error',
-                  'Failed to add item to cart.',
-                  false
-                );
-              }
-            );
+          this.addItemToCart(response.id_cart);
         } else {
-          this.EditToastMessage(
-            'Error',
-            'Failed to create or retrieve cart.',
-            true
-          );
+          this.toastr.error('Failed to create or retrieve cart.', 'Error');
         }
+      },
+      (error) => {
+        this.toastr.error('Failed to create or retrieve cart.', 'Error');
+      }
+    );
+  }
+
+  /**
+   * Ensures that a cart exists by retrieving or creating one.
+   * @returns An Observable containing the cart response.
+   */
+  private ensureCart(): Observable<any> {
+    return this.cartService.GetCart().pipe(
+      catchError(() => this.cartService.CreateCart()),
+      switchMap((response) => {
+        if (response) {
+          return of(response);
+        } else {
+          return this.cartService.CreateCart();
+        }
+      })
+    );
+  }
+
+  /**
+   * Adds an item to the cart.
+   * @param id_cart The ID of the cart to add the item to.
+   */
+  private addItemToCart(id_cart: number): void {
+    this.cartService
+      .AddItemToCart(
+        this.SelectedProduct.quantity,
+        this.SelectedProduct.id_product,
+        id_cart,
+        this.SelectedProduct.size
+      )
+      .subscribe(() => {
+        this.toastr.success('Item added to cart successfully!', 'Success');
       });
   }
 }

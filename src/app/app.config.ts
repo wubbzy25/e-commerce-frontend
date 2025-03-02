@@ -18,7 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideToastr({
       timeOut: 2000,
-      preventDuplicates: true,
       progressBar: true,
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),

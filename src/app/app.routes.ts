@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './Guards/AuthGuard';
 import { AlreadyAuthGuard } from './Guards/AlreadyAuthGuard';
@@ -30,11 +29,6 @@ export const routes: Routes = [
     title: 'login',
     canActivate: [AlreadyAuthGuard],
     component: LoginComponent,
-  },
-  {
-    path: 'forgot-password',
-    title: 'forgot-password',
-    component: ForgotPasswordComponent,
   },
   {
     path: 'catalog',

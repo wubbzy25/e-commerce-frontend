@@ -8,8 +8,10 @@
       <h2>{{ product.name }}</h2>
       <app-star-rating
         class="rating"
+        *ngIf="product && product.averageScore"
         [rating]="product.averageScore"
       ></app-star-rating>
+
       <div class="price-container">
         <p *ngIf="price_discount > 0">${{ price_discount }}</p>
         <p *ngIf="price_discount > 0" class="strikethrough">
@@ -63,7 +65,7 @@
   <mat-divider></mat-divider>
   <div class="review-container">
     <div class="review-header">
-      <h2>All Reviews({{ Reviews.length }})</h2>
+      <h2>All Reviews({{ Reviews.content.length }})</h2>
       <div class="left-section">
         <div class="sort-container">
           <button class="sort-box" (click)="ToggleDropDownReviewsMenu()">
@@ -89,7 +91,7 @@
       </div>
     </div>
     <div class="review-container">
-      <div *ngFor="let review of Reviews">
+      <div *ngFor="let review of Reviews.content">
         <app-reviews-card
           [name]="review.name"
           [rating]="review.score"
